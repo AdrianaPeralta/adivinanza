@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Adivinanza</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container header-h1 text-secondary text-center">
+            <h1 class="header-h1"> Adivina ¿Que es? <br> </h1>
+        </div>
+    </header>
+
+    <div class="jumbotron text-center">
+        <h3>"Canta sin voz, vuela sin alas, sin dientes muerde, sin boca habla"</h3>
+    </div>
+
+    <div class="container-fluid text-center border border-danger" style="padding: 3.5rem;">
+        <h2 style="padding-bottom: 2rem ;">
+            Introduce aquí tu respuesta
+        </h2>
+
+        <input type="text" id="dato" class="input-group-lg p-3 mr-3 ml-3; font-weight-bold;font-size: 2rem ; text-uppercase" placeholder=" Introduce tu respuesta">
+
+        <button id="boton" type="button" class="btn btn-outline-primary" style="font-size: 2rem;margin-left: 3rem;  padding-left: 2rem; padding-right: 2rem;">
+            Envia tu respuesta
+        </button>
+
+
+    </div>
+    <div class="container-fluid text-center" style="padding: 3.5rem; margin-top: 2rem;">
+        <p id="resolucion" style="text-align: center ; font-size: 3rem; border: 2rem; border-color: coral;"></p>
+    </div>
+    <script>
+        var respuesta = "VIENTO",
+            formuladas = 0,
+            acertadas = 0;
+        hazPregunta();
+
+        document.getElementById('boton').addEventListener('click', function() {
+            var entrada = document.getElementById("dato").value;
+
+            if (entrada == respuesta) {
+                acertadas = 4;
+                muestraResultado()
+            }
+
+            if (formuladas < 5) {
+                muestraResultado()
+                acertadas++;
+                hazPregunta();
+            }
+        });
+
+        function hazPregunta() {
+            document.getElementById('dato').value = '';
+            formuladas++;
+        }
+
+        function muestraResultado() {
+            var resultado;
+
+            switch (acertadas) {
+                case 0:
+                    resultado = 'Bueno, no has acertado. ¡Vuelve a intentarlo!  :-)';
+                    break;
+                case 1:
+                    resultado = 'Te doy una pista: \"A veces es suave y otras muy fuerte "\.';
+                    break;
+                case 2:
+                    resultado = 'Te doy otra pista: \"Se lo llama el Innombrable "\.';
+                    break;
+                case 3:
+                    resultado = '¡Que pena! No has acertado \n¡La respuesta es el \"VIENTO"\!  :-/ ';
+                    myFunction()
+                    break;
+                case 4:
+                    resultado = '¡EXCELENTE, has acertado! :-D';
+                    myFunction()
+                    break;
+            }
+            document.getElementById('resolucion').innerHTML = resultado;
+        }
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(function() {
+                alert("Si quieres volver a jugar haz click en Aceptar");
+                location.reload();
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>
